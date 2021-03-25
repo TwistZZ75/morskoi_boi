@@ -111,11 +111,128 @@ int provarkarasstanovki(int tip)
 		}
 		for (int i = 0; i < 10; i++)
 		{
-			if (x == i && y > 0 && y < 9)
+			if (x == i && y >= 0 && y < 10)
 			{
-				for (int i = x; i < x + 2; i++)
+				for (int i = x-1; i < x + 2; i++)
 				{
-					for (int j = y - 1; j < y + 2; j++)
+					for (int j = y-1 ; j < y + 2; j++)
+					{
+						if (Pole[i][j] == 0)
+						{
+							k++;
+						}
+						else
+						{
+							k = 0;
+							break;
+						}
+					}
+					if (k == 0)
+					{
+						break;
+					}
+				}
+			}
+		}
+	}
+	if (tip == 2)
+	{
+		//для клетки а1
+		if (x == 0 and y == 0)
+		{
+			for (int i = x; i < x + 3; i++)
+			{
+				for (int j = y; j < y + 3; j++)
+				{
+					if (Pole[i][j] == 0)
+					{
+						k++;
+					}
+					else
+					{
+						k = 0;
+						break;
+					}
+				}
+				if (k == 0)
+				{
+					break;
+				}
+			}
+		}
+		if (x == 10 and y == 0)
+		{
+			for (int i = x; i < x - 3; i++)
+			{
+				for (int j = y; j < y + 3; j++)
+				{
+					if (Pole[i][j] == 0)
+					{
+						k++;
+					}
+					else
+					{
+						k = 0;
+						break;
+					}
+				}
+				if (k == 0)
+				{
+					break;
+				}
+			}
+		}
+		if (x == 0 and y == 10)
+		{
+			for (int i = x; i < x + 3; i++)
+			{
+				for (int j = y; j < y - 3; j++)
+				{
+					if (Pole[i][j] == 0)
+					{
+						k++;
+					}
+					else
+					{
+						k = 0;
+						break;
+					}
+				}
+				if (k == 0)
+				{
+					break;
+				}
+			}
+		}
+		if (x == 10 and y == 10)
+		{
+			for (int i = x; i < x - 3; i++)
+			{
+				for (int j = y; j < y - 3; j++)
+				{
+					if (Pole[i][j] == 0)
+					{
+						k++;
+					}
+					else
+					{
+						k = 0;
+						break;
+					}
+				}
+				if (k == 0)
+				{
+					break;
+				}
+			}
+		}
+		for (int i = 0; i < 10; i++)
+		{
+			if (x == i && y >= 0 && y < 10)
+			{
+				for (int i = x - 2; i < x + 3; i++)
+				{
+					for (int j = y - 2; j < y + 3; j++)
 					{
 						if (Pole[i][j] == 0)
 						{
@@ -178,6 +295,8 @@ int rasstanovka()
 				m--;
 				o--;
 			}
+			do
+			{
 				if (tip > 1 && tip <= 4)
 				{
 					cout << "Выберите начальную координату корабля: ";
@@ -194,16 +313,32 @@ int rasstanovka()
 						{
 							for (int i = 0; i < tip; i++)
 							{
-								Pole[x][y] = 1;
-								x--;
+								if (provarkarasstanovki(tip) != 0)
+								{
+									Pole[x][y] = 1;
+									x--;
+								}
+								else
+								{
+									cout << "Неверно выбраны координаты!";
+									Pole[x][y] = 0;
+								}
 							}
 						}
 						if (napravlenie == 'R' || napravlenie == 'r')
 						{
 							for (int i = 0; i < tip; i++)
 							{
-								Pole[x][y] = 1;
-								x++;
+								if (provarkarasstanovki(tip) != 0)
+								{
+									Pole[x][y] = 1;
+									x++;
+								}
+								else
+								{
+									cout << "Неверно выбраны координаты!";
+									Pole[x][y] = 0;
+								}
 							}
 						}
 					}
@@ -215,35 +350,54 @@ int rasstanovka()
 						{
 							for (int i = 0; i < tip; i++)
 							{
-								Pole[x][y] = 1;
-								y--;
+								if (provarkarasstanovki(tip) != 0)
+								{
+									Pole[x][y] = 1;
+									y--;
+								}
+								else
+								{
+									cout << "Неверно выбраны координаты!";
+									Pole[x][y] = 0;
+								}
 							}
 						}
 						if (napravlenie == 'D' || napravlenie == 'd')
 						{
 							for (int i = 0; i < tip; i++)
 							{
-								Pole[x][y] = 1;
-								y++;
+								if (provarkarasstanovki(tip) != 0)
+								{
+									Pole[x][y] = 1;
+									y++;
+								}
+								else
+								{
+									cout << "Неверно выбраны координаты!";
+									Pole[x][y] = 0;
+								}
 							}
 						}
 					}
 				}
+			} while (Pole[x][y] != 1);
 				if (tip == 2)
 				{
 					n--;
 					o--;
 				}
-		if (tip == 3)
-		{
-				b--;
-				o--;
-		}
-		if (tip == 4)
-		{
-				v--;
-				o--;
-		}
+
+				if (tip == 3)
+				{
+					b--;
+					o--;
+				}
+				if (tip == 4)
+				{
+					v--;
+					o--;
+				}
+			
 		poleigroka();
 	} while (o != 0);
 	cout << "Все корабли расставлены:)" << "\n";
