@@ -14,7 +14,7 @@ int Pole[10][10];
 int x, y;//x-столбик y-строчка
 void poleigroka();
 void polekompa();
-//€ не понимаю как мне сделать так,чтобы не дублировать расстановку в ту же клетку и запретить ставить на соседние клетки(функци€ ниже не работает)
+//теперь она работает,но не полностью,по диагонали корабли став€тс€ всЄ так же без ограничений,но возможно нужны просто доп услови€ ниже
 int provarkarasstanovki(int tip)
 {
 	int k = 1;//флаг на ошибку расстановки
@@ -43,11 +43,11 @@ int provarkarasstanovki(int tip)
 				}
 			}
 		}
-		if (x == 0 && y > 0 && y < 9)
+		if (x == 10 and y == 0)
 		{
-			for (int i = x; i < x + 2; i++)
+			for (int i = x; i < x - 2; i++)
 			{
-				for (int j = y-1; j < y + 2; j++)
+				for (int j = y; j < y + 2; j++)
 				{
 					if (Pole[i][j] == 0)
 					{
@@ -62,6 +62,75 @@ int provarkarasstanovki(int tip)
 				if (k == 0)
 				{
 					break;
+				}
+			}
+		}
+		if (x == 0 and y == 10)
+		{
+			for (int i = x; i < x + 2; i++)
+			{
+				for (int j = y; j < y - 2; j++)
+				{
+					if (Pole[i][j] == 0)
+					{
+						k++;
+					}
+					else
+					{
+						k = 0;
+						break;
+					}
+				}
+				if (k == 0)
+				{
+					break;
+				}
+			}
+		}
+		if (x == 10 and y == 10)
+		{
+			for (int i = x; i < x - 2; i++)
+			{
+				for (int j = y; j < y - 2; j++)
+				{
+					if (Pole[i][j] == 0)
+					{
+						k++;
+					}
+					else
+					{
+						k = 0;
+						break;
+					}
+				}
+				if (k == 0)
+				{
+					break;
+				}
+			}
+		}
+		for (int i = 0; i < 10; i++)
+		{
+			if (x == i && y > 0 && y < 9)
+			{
+				for (int i = x; i < x + 2; i++)
+				{
+					for (int j = y - 1; j < y + 2; j++)
+					{
+						if (Pole[i][j] == 0)
+						{
+							k++;
+						}
+						else
+						{
+							k = 0;
+							break;
+						}
+					}
+					if (k == 0)
+					{
+						break;
+					}
 				}
 			}
 		}
@@ -91,10 +160,6 @@ int rasstanovka()
 					cin >> y;
 					x = x - 1;
 					y = y - 1;
-					/*if (provarkarasstanovki(tip) == 0)
-					{
-						cout << "\n\n—юда нельз€ поставить корабль!\n\n";
-					}*/
 					if (x < 10 && y < 10 && x>=0 && y>=0 && provarkarasstanovki(tip) != 0)
 					{
 							Pole[x][y] = 1;
