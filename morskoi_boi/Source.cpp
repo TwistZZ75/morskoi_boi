@@ -141,14 +141,16 @@ int provarkarasstanovki(int tip)
 int proverkarasstanovki_vertical(int tip, char napravlenie)
 {
 	int k = 1;
+	int stolbec;
+	int stroka;
 	if (tip >= 2)
 	{
 		//для клетки а1
 		if (x == 0 and y == 0)
 		{
-			for (int stolbec = x; stolbec < x + tip; stolbec++)
+			for (stolbec = x; stolbec < x + tip; stolbec++)
 			{
-				for (int stroka = y; stroka < y + tip; stroka++)
+				for (stroka = y; stroka < y + tip; stroka++)
 				{
 					if (Pole[stolbec][stroka] == 0)
 					{
@@ -168,9 +170,9 @@ int proverkarasstanovki_vertical(int tip, char napravlenie)
 		}
 		if (x == 10 and y == 0)
 		{
-			for (int stolbec = x; stolbec < x - tip; stolbec++)
+			for (stolbec = x; stolbec < x - tip; stolbec++)
 			{
-				for (int stroka = y; stroka < y + tip + 1; stroka++)
+				for (stroka = y; stroka < y + tip + 1; stroka++)
 				{
 					if (Pole[stolbec][stroka] == 0)
 					{
@@ -190,9 +192,9 @@ int proverkarasstanovki_vertical(int tip, char napravlenie)
 		}
 		if (x == 0 and y == 10)
 		{
-			for (int stolbec = x; stolbec < x + tip; stolbec++)
+			for (stolbec = x; stolbec < x + tip; stolbec++)
 			{
-				for (int stroka = y; stroka < y - tip - 1; stroka++)
+				for (stroka = y; stroka < y - tip - 1; stroka++)
 				{
 					if (Pole[stolbec][stroka] == 0)
 					{
@@ -212,9 +214,9 @@ int proverkarasstanovki_vertical(int tip, char napravlenie)
 		}
 		if (x == 10 and y == 10)
 		{
-			for (int stolbec = x; stolbec < x - tip; stolbec++)
+			for (stolbec = x; stolbec < x - tip; stolbec++)
 			{
-				for (int stroka = y; stroka < y - tip - 1; stroka++)
+				for (stroka = y; stroka < y - tip - 1; stroka++)
 				{
 					if (Pole[stolbec][stroka] == 0)
 					{
@@ -236,20 +238,35 @@ int proverkarasstanovki_vertical(int tip, char napravlenie)
 		{
 			if (x == i && y > 0 && y < 10)
 			{
-				for (int stolbec = x; stolbec < x + tip; stolbec++)
+				for (stolbec = x; stolbec < x + 2; stolbec++)
 				{
 					if (napravlenie == 'D' || napravlenie == 'd')
 					{
-						for (int stroka = y; stroka < y + tip; stroka++)
+						for (stroka = y; stroka < y + tip; stroka++)
 						{
-							if (Pole[stolbec][stroka] == 0)
+							if (x > 0 && x <= 9)
 							{
-								k++;
+								if (Pole[stolbec][stroka] == 0)
+								{
+									k++;
+								}
+								else
+								{
+									k = 0;
+									break;
+								}
 							}
 							else
 							{
-								k = 0;
-								break;
+								if (Pole[stolbec][stroka] == 0)
+								{
+									k++;
+								}
+								else
+								{
+									k = 0;
+									break;
+								}
 							}
 						}
 						if (k == 0)
@@ -259,7 +276,7 @@ int proverkarasstanovki_vertical(int tip, char napravlenie)
 					}
 					else if (napravlenie == 'U' || napravlenie == 'u')
 					{
-						for (int stroka = y; stroka < y - tip; stroka++)
+						for (stroka = y; stroka < y - tip; stroka++)
 						{
 							if (Pole[stolbec][stroka] == 0)
 							{
@@ -282,9 +299,150 @@ int proverkarasstanovki_vertical(int tip, char napravlenie)
 	}
 	return k;
 }
+//еще не трогал ее,там нужно столбцы,а не строки изменять
 int provarkarasstanovki_gorizontal(int tip, char napravlenie)
 {
-	int k=0;
+	int k = 1;
+	int stroka, stolbec;
+	if (tip >= 2)
+	{
+		//для клетки а1
+		if (x == 0 and y == 0)
+		{
+			for (stolbec = x; stolbec < x + tip; stolbec++)
+			{
+				for (stroka = y; stroka < y + tip; stroka++)
+				{
+					if (Pole[stolbec][stroka] == 0)
+					{
+						k++;
+					}
+					else
+					{
+						k = 0;
+						break;
+					}
+				}
+				if (k == 0)
+				{
+					break;
+				}
+			}
+		}
+		if (x == 10 and y == 0)
+		{
+			for (stolbec = x; stolbec < x - tip; stolbec++)
+			{
+				for (stroka = y; stroka < y + tip + 1; stroka++)
+				{
+					if (Pole[stolbec][stroka] == 0)
+					{
+						k++;
+					}
+					else
+					{
+						k = 0;
+						break;
+					}
+				}
+				if (k == 0)
+				{
+					break;
+				}
+			}
+		}
+		if (x == 0 and y == 10)
+		{
+			for (stolbec = x; stolbec < x + tip; stolbec++)
+			{
+				for (stroka = y; stroka < y - tip - 1; stroka++)
+				{
+					if (Pole[stolbec][stroka] == 0)
+					{
+						k++;
+					}
+					else
+					{
+						k = 0;
+						break;
+					}
+				}
+				if (k == 0)
+				{
+					break;
+				}
+			}
+		}
+		if (x == 10 and y == 10)
+		{
+			for (stolbec = x; stolbec < x - tip; stolbec++)
+			{
+				for (stroka = y; stroka < y - tip - 1; stroka++)
+				{
+					if (Pole[stolbec][stroka] == 0)
+					{
+						k++;
+					}
+					else
+					{
+						k = 0;
+						break;
+					}
+				}
+				if (k == 0)
+				{
+					break;
+				}
+			}
+		}
+		for (int i = 0; i < 10; i++)
+		{
+			if (x == i && y > 0 && y < 10)
+			{
+				for (stroka = y; stroka < y + tip; stroka++)
+				{
+					if (napravlenie == 'L' || napravlenie == 'l')
+					{
+						for (stolbec = x; stolbec < x - tip; stolbec++)
+						{
+							if (Pole[stolbec][stroka] == 0)
+							{
+								k++;
+							}
+							else
+							{
+								k = 0;
+								break;
+							}
+						}
+						if (k == 0)
+						{
+							break;
+						}
+					}
+					else if (napravlenie == 'R' || napravlenie == 'r')
+					{
+						for (stolbec = x; stolbec < x + tip; stolbec++)
+						{
+							if (Pole[stolbec][stroka] == 0)
+							{
+								k++;
+							}
+							else
+							{
+								k = 0;
+								break;
+							}
+						}
+						if (k == 0)
+						{
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
 	return k;
 }
 
@@ -294,6 +452,7 @@ int rasstanovka()
 	char pologenie;
 	char napravlenie;
 	int q;//переменная в которой будет изменяться у
+	int t;//переменная в которой будет изменяться x
 	int m = 4, n = 3, b = 2, v = 1;
 	int o = 10;//общее количество кораблей
 	do
@@ -341,6 +500,7 @@ int rasstanovka()
 				x = x - 1;
 				y = y - 1;
 				q = y;
+				t = x;
 				cout << "Выберите его положение(вертикально-V/горизонтально-G): ";
 				cin >> pologenie;
 				if (pologenie == 'G' || pologenie == 'g')
@@ -406,23 +566,20 @@ int rasstanovka()
 						{
 							if (proverkarasstanovki_vertical(tip, napravlenie) != 0)
 							{
-								/*
-								можно ввести переменную запоминающую значение у и менять ее в этом цикле,а в do while оставить у
-								*/
 								Pole[x][y] = 1;
 								y++;
 							}
-							else
+							else 
 							{
 								cout << "Неверно выбраны координаты!\n";
 								Pole[x][y] = 0;
+								//break;
 							}
 						}
-
 					}
 				}
 
-			} while (Pole[x][q] != 1);
+			} while (Pole[x][q] != 1);//||Pole[t][y] != 1);
 		}
 		if (tip == 2)
 		{
