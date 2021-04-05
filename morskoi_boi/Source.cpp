@@ -17,101 +17,15 @@ int x, y;//x-столбик y-строчка
 void poleigroka();
 
 void polekompa();
+
+int proverka_matrici_vokrug();
+
 //теперь она работает,но не полностью,по диагонали корабли ставятся всё так же без ограничений,но возможно нужны просто доп условия ниже
 int provarkarasstanovki(int tip)
 {
 	int k = 1;//флаг на ошибку расстановки
 	if (tip == 1)
 	{
-		//для клетки а1
-		/*if (x == 0 and y == 0)
-		{
-			for (int stolbec = x; stolbec < x + 2; stolbec++)
-			{
-				for (int stroka = y; stroka < y + 2; stroka++)
-				{
-					if (Pole[stolbec][stroka] == 0)
-					{
-						k++;
-					}
-					else
-					{
-						k = 0;
-						break;
-					}
-				}
-				if (k == 0)
-				{
-					break;
-				}
-			}
-		}
-		if (x == 10 and y == 0)
-		{
-			for (int stolbec = x; stolbec < x - 2; stolbec++)
-			{
-				for (int stroka = y; stroka < y + 2; stroka++)
-				{
-					if (Pole[stolbec][stroka] == 0)
-					{
-						k++;
-					}
-					else
-					{
-						k = 0;
-						break;
-					}
-				}
-				if (k == 0)
-				{
-					break;
-				}
-			}
-		}
-		if (x == 0 and y == 9)
-		{
-			for (int stolbec = x; stolbec < x + 2; stolbec++)
-			{
-				for (int stroka = y - 2 ; stroka <= y; stroka++)
-				{
-					if (Pole[stolbec][stroka] == 0)
-					{
-						k++;
-					}
-					else
-					{
-						k = 0;
-						break;
-					}
-				}
-				if (k == 0)
-				{
-					break;
-				}
-			}
-		}
-		if (x == 9 and y == 9)
-		{
-			for (int stolbec = x-1; stolbec <= x; stolbec++)
-			{
-				for (int stroka = y-1; stroka <= y; stroka++)
-				{
-					if (Pole[stolbec][stroka] == 0)
-					{
-						k++;
-					}
-					else
-					{
-						k = 0;
-						break;
-					}
-				}
-				if (k == 0)
-				{
-					break;
-				}
-			}
-		}*/
 		if (x == 0 && y > 0 && y < 10)
 		{
 			for (int stolbec = x; stolbec < x + 2; stolbec++)
@@ -192,95 +106,6 @@ int proverkarasstanovki_vertical(int tip, char napravlenie)
 	int stroka;
 	if (tip >= 2)
 	{
-		//для клетки а1
-		/*if (x == 0 and y == 0)
-		{
-			for (stolbec = x; stolbec < x + tip; stolbec++)
-			{
-				for (stroka = y; stroka < y + tip; stroka++)
-				{
-					if (Pole[stolbec][stroka] == 0)
-					{
-						k++;
-					}
-					else
-					{
-						k = 0;
-						break;
-					}
-				}
-				if (k == 0)
-				{
-					break;
-				}
-			}
-		}
-		if (x == 10 and y == 0)
-		{
-			for (stolbec = x; stolbec < x - tip; stolbec++)
-			{
-				for (stroka = y; stroka < y + tip + 1; stroka++)
-				{
-					if (Pole[stolbec][stroka] == 0)
-					{
-						k++;
-					}
-					else
-					{
-						k = 0;
-						break;
-					}
-				}
-				if (k == 0)
-				{
-					break;
-				}
-			}
-		}
-		if (x == 0 and y == 10)
-		{
-			for (stolbec = x; stolbec < x + tip; stolbec++)
-			{
-				for (stroka = y; stroka < y - tip - 1; stroka++)
-				{
-					if (Pole[stolbec][stroka] == 0)
-					{
-						k++;
-					}
-					else
-					{
-						k = 0;
-						break;
-					}
-				}
-				if (k == 0)
-				{
-					break;
-				}
-			}
-		}
-		if (x == 10 and y == 10)
-		{
-			for (stolbec = x; stolbec < x - tip; stolbec++)
-			{
-				for (stroka = y; stroka < y - tip - 1; stroka++)
-				{
-					if (Pole[stolbec][stroka] == 0)
-					{
-						k++;
-					}
-					else
-					{
-						k = 0;
-						break;
-					}
-				}
-				if (k == 0)
-				{
-					break;
-				}
-			}
-		}*/
 		if (x == 0 && y>=0 && y<10)
 		{
 			for (stolbec = x; stolbec < x + 2; stolbec++)
@@ -418,95 +243,6 @@ int provarkarasstanovki_gorizontal(int tip, char napravlenie)
 	int stroka, stolbec;
 	if (tip >= 2)
 	{
-		//для клетки а1
-		/*if (x == 0 and y == 0)
-		{
-			for (stolbec = x; stolbec < x + tip; stolbec++)
-			{
-				for (stroka = y; stroka < y + tip; stroka++)
-				{
-					if (Pole[stolbec][stroka] == 0)
-					{
-						k++;
-					}
-					else
-					{
-						k = 0;
-						break;
-					}
-				}
-				if (k == 0)
-				{
-					break;
-				}
-			}
-		}
-		if (x == 10 and y == 0)
-		{
-			for (stolbec = x; stolbec < x - tip; stolbec++)
-			{
-				for (stroka = y; stroka < y + tip + 1; stroka++)
-				{
-					if (Pole[stolbec][stroka] == 0)
-					{
-						k++;
-					}
-					else
-					{
-						k = 0;
-						break;
-					}
-				}
-				if (k == 0)
-				{
-					break;
-				}
-			}
-		}
-		if (x == 0 and y == 10)
-		{
-			for (stolbec = x; stolbec < x + tip; stolbec++)
-			{
-				for (stroka = y; stroka < y - tip - 1; stroka++)
-				{
-					if (Pole[stolbec][stroka] == 0)
-					{
-						k++;
-					}
-					else
-					{
-						k = 0;
-						break;
-					}
-				}
-				if (k == 0)
-				{
-					break;
-				}
-			}
-		}
-		if (x == 10 and y == 10)
-		{
-			for (stolbec = x; stolbec < x - tip; stolbec++)
-			{
-				for (stroka = y; stroka < y - tip - 1; stroka++)
-				{
-					if (Pole[stolbec][stroka] == 0)
-					{
-						k++;
-					}
-					else
-					{
-						k = 0;
-						break;
-					}
-				}
-				if (k == 0)
-				{
-					break;
-				}
-			}
-		}*/
 		if (y == 0 && x >= 0 && x < 10)
 		{
 			for (stroka = y; stroka < y + 1; stroka++)
@@ -942,15 +678,96 @@ int moihod()/*в этой или другой созданной ф-ции нужна проверка на убийство кораб
 
 int autorasstanovka()
 {
+	srand(time(0));
+	int tip;
 	int o = 10;
+	int one = 4, two = 3, three = 2, four = 1;
 	do
 	{
 		x = rand() % 10;
 		y = rand() % 10;
-		
+		do
+		{
+
+		} while (o != 0);
 		o++;
 	} while (o == 0);
 	return o;
+}
+
+int proverka_matrici_vokrug()
+{
+	int l = 1;
+	if (x == 0 && y > 0 && y < 10)
+	{
+		for (int stolbec = x; stolbec < x + 2; stolbec++)
+		{
+			for (int stroka = y - 1; stroka < y + 2; stroka++)
+			{
+				if (Pole[stolbec][stroka] == 0)
+				{
+					l++;
+				}
+				else
+				{
+					l = 0;
+					break;
+				}
+			}
+			if (l == 0)
+			{
+				break;
+			}
+		}
+	}
+	if (x == 9 && y > 0 && y < 10)
+	{
+		for (int stolbec = x - 1; stolbec <= x; stolbec++)
+		{
+			for (int stroka = y - 1; stroka <= y; stroka++)
+			{
+				if (Pole[stolbec][stroka] == 0)
+				{
+					l++;
+				}
+				else
+				{
+					l = 0;
+					break;
+				}
+			}
+			if (l == 0)
+			{
+				break;
+			}
+		}
+	}
+	for (int i = 1; i < 9; i++)
+	{
+		if (x == i && y > 0 && y < 10)
+		{
+			for (int stolbec = x - 1; stolbec < x + 2; stolbec++)
+			{
+				for (int stroka = y - 1; stroka < y + 2; stroka++)
+				{
+					if (Pole[stolbec][stroka] == 0)
+					{
+						l++;
+					}
+					else
+					{
+						l = 0;
+						break;
+					}
+				}
+				if (l == 0)
+				{
+					break;
+				}
+			}
+		}
+	}
+	return l;
 }
 
 int main()
