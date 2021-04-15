@@ -747,7 +747,6 @@ int auto_rasstanovka(int tipv, int tipg)
 	int count_1 = 0;
 	do
 	{
-		srand(time(0));
 		autostroka = rand() % 10;
 		autostolbec = rand() % 10;
 		int count_2 = 0;
@@ -755,13 +754,14 @@ int auto_rasstanovka(int tipv, int tipg)
 		{
 			for (int i = autostolbec; i < autostolbec + 2 + tipg; i++)
 			{
-				for (int j = autostroka; j < autostroka + 2 + tipv; j++)
+				if (i >= 0 && i < 10)
 				{
-					if (autostroka >= 0 && autostroka < 10)
+					for (int j = autostroka - 1; j < autostroka + 2 + tipv; j++)
 					{
-						if (autostolbec >= 0 && autostolbec < 10)
+						if (j >= 0 && j < 10)
 						{
-							if (Pole_Comp[autostolbec][autostroka] == 0)
+
+							if (Pole_Comp[i][j] == 0)
 							{
 								count_1++;
 							}
@@ -777,29 +777,29 @@ int auto_rasstanovka(int tipv, int tipg)
 							break;
 						}
 					}
-					else
-					{
-						count_1 = 0;
-						break;
-					}
-					if (count_1 == 0)
-					{
-						break;
-					}
+				}
+				else
+				{
+					count_1 = 0;
+					break;
+				}
+				if (count_1 == 0)
+				{
+					break;
 				}
 			}
 		}
 		if (autostolbec == 9 && autostroka >= 0 && autostroka < 10)
 		{
-			for (int i = autostolbec - 1; i < autostolbec + 2 + tipg; i++)
+			for (int i = autostolbec - 1; i < autostolbec; i++)
 			{
-				for (int j = autostroka - 1; j < autostroka + 2 + tipv; j++)
+				if (i >= 0 && i < 10)
 				{
-					if (autostroka >= 0 && autostroka < 10)
+					for (int j = autostroka - 1; j < autostroka + 2 + tipv; j++)
 					{
-						if (autostolbec >= 0 && autostolbec < 10)
+						if (j >= 0 && j < 10)
 						{
-							if (Pole_Comp[autostolbec][autostroka] == 0)
+							if (Pole_Comp[i][j] == 0)
 							{
 								count_1++;
 							}
@@ -815,15 +815,15 @@ int auto_rasstanovka(int tipv, int tipg)
 							break;
 						}
 					}
-					else
-					{
-						count_1 = 0;
-						break;
-					}
-					if (count_1 == 0)
-					{
-						break;
-					}
+				}
+				else
+				{
+					count_1 = 0;
+					break;
+				}
+				if (count_1 == 0)
+				{
+					break;
 				}
 			}
 		}
@@ -833,9 +833,9 @@ int auto_rasstanovka(int tipv, int tipg)
 			{
 				for (int stolb = autostolbec - 1; stolb < autostolbec + 2 + tipg; stolb++)
 				{
-					for (int strok = autostroka - 1; strok < autostroka + 2 + tipv; strok++)
+					if (stolb >= 0 && stolb < 10)
 					{
-						if (stolb >= 0 && stolb < 10)
+						for (int strok = autostroka - 1; strok < autostroka + 2 + tipv; strok++)
 						{
 							if (strok >= 0 && strok < 10)
 							{
@@ -855,15 +855,15 @@ int auto_rasstanovka(int tipv, int tipg)
 								break;
 							}
 						}
-						else
-						{
-							count_1 = 0;
-							break;
-						}
-						if (count_1 == 0)
-						{
-							break;
-						}
+					}
+					else
+					{
+						count_1 = 0;
+						break;
+					}
+					if (count_1 == 0)
+					{
+						break;
 					}
 				}
 			}
@@ -881,25 +881,37 @@ int auto_rasstanovka(int tipv, int tipg)
 					}
 					if (tipv == 1)
 					{
-						for (int gor = autostroka; gor < autostroka + 2; gor++)
+						for (int gor = autostolbec; gor < autostolbec + 2; gor++)
 						{
-							Pole_Comp[autostolbec][gor] = 1;
+							if (gor >= 0 && gor < 10)
+							{
+								Pole_Comp[autostolbec][gor] = 1;
+							}
+							else break;
 						}
 						count_2 = 1;
 					}
 					if (tipv == 2)
 					{
-						for (int gor = autostroka; gor < autostroka + 3; gor++)
+						for (int gor = autostolbec; gor < autostolbec + 3; gor++)
 						{
-							Pole_Comp[autostolbec][gor] = 1;
+							if (gor >= 0 && gor < 10)
+							{
+								Pole_Comp[autostolbec][gor] = 1;
+							}
+							else break;
 						}
 						count_2 = 1;
 					}
 					if (tipv == 3)
 					{
-						for (int gor = autostroka; gor < autostroka + 4; gor++)
+						for (int gor = autostolbec; gor < autostolbec + 4; gor++)
 						{
-							Pole_Comp[autostolbec][gor] = 1;
+							if (gor >= 0 && gor < 10)
+							{
+								Pole_Comp[autostolbec][gor] = 1;
+							}
+							else break;
 						}
 						count_2 = 1;
 					}
@@ -910,7 +922,11 @@ int auto_rasstanovka(int tipv, int tipg)
 					{
 						for (int ver = autostroka; ver < autostroka + 2; ver++)
 						{
-							Pole_Comp[ver][autostroka] = 1;
+							if (ver >= 0 && ver < 10)
+							{
+								Pole_Comp[ver][autostroka] = 1;
+							}
+							else break;
 						}
 						count_2 = 1;
 					}
@@ -918,7 +934,11 @@ int auto_rasstanovka(int tipv, int tipg)
 					{
 						for (int ver = autostroka; ver < autostroka + 3; ver++)
 						{
-							Pole_Comp[ver][autostroka] = 1;
+							if (ver >= 0 && ver < 10)
+							{
+								Pole_Comp[ver][autostroka] = 1;
+							}
+							else break;
 						}
 						count_2 = 1;
 					}
@@ -926,7 +946,11 @@ int auto_rasstanovka(int tipv, int tipg)
 					{
 						for (int ver = autostroka; ver < autostroka + 4; ver++)
 						{
-							Pole_Comp[ver][autostroka] = 1;
+							if (ver >= 0 && ver < 10)
+							{
+								Pole_Comp[ver][autostroka] = 1;
+							}
+							else break;
 						}
 						count_2 = 1;
 					}
@@ -934,7 +958,7 @@ int auto_rasstanovka(int tipv, int tipg)
 			} while (count_2 == 0);
 		}
 		if (count_2 == 1) count_1 = -1;
-	} while (count_1 == -1);
+	} while (count_1 != -1);
 	polekompa();
 	return 0;
 }
