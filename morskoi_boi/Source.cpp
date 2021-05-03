@@ -382,6 +382,11 @@ void polekompa(int Pole_Comp[10][10], int Pole_Mask[10][10], int x, int y)
 	}
 }
 
+/*int obvodka(int Pole[10][10], int Pole_Comp[10][10], int Pole_Mask[10][10], int x, int y);
+{
+
+}*/
+
 int moihod(int Pole[10][10], int Pole_Comp[10][10], int Pole_Mask[10][10], int x, int y)/*в этой или другой созданной ф-ции нужна проверка на убийство корабля(опять же проверка матрицы вокруг точки выстрела)
 			*/
 {
@@ -392,7 +397,7 @@ int moihod(int Pole[10][10], int Pole_Comp[10][10], int Pole_Mask[10][10], int x
 		cin >> x >> y;
 		x = x - 1;
 		y = y - 1;
-		if (Pole_Comp[x][y] == 1)//&& выполняется проверка на то,что вокруг есть ещё клетка с кораблём)
+		if (Pole_Comp[x][y] == 1)
 		{
 			if (Pole_Mask[x][y] != 0)
 			{
@@ -410,7 +415,7 @@ int moihod(int Pole[10][10], int Pole_Comp[10][10], int Pole_Mask[10][10], int x
 				cout << "Убил!" << endl;
 			}
 		}
-		else if (Pole_Comp[x][y] == 0)//&& не выполняется проверка на то,что вокруг есть ещё клетка с кораблём)
+		else if (Pole_Comp[x][y] == 0)
 		{
 			if (Pole_Mask[x][y] != 0)
 			{
@@ -463,13 +468,50 @@ int proverka_compmade_rasstanovki(int Pole_Comp[10][10], int size_ship, int stol
 	return comp_setting_possible;
 }
 
-/*int hodkomp()
+int hodkomp(int Pole[10][10], int x, int y)
 {
-
-}*/
+	int count_shoot = 0;
+	cout << "Ходит компьютер: " << endl;
+	int mode_shoot = 0;
+	do
+	{
+		x = rand() % 10;
+		y = rand() % 10;
+		if (Pole [x][y] == 1)
+		{
+			if (Pole [x][y] != 0 && Pole [x][y] != 1)
+			{
+				cout << "Сюда уже был произведен выстрел!" << endl;
+				continue;
+			}
+			Pole [x][y] = 2;
+			cout << "Ранил!" << endl;
+			poleigroka(Pole, x, y);
+			if (Pole [x][y] != 1 || Pole [x][y + 1] != 1 || Pole [x][y - 1] != 1 ||
+				Pole [x + 1][y] != 1 || Pole [x + 1][y + 1] != 1 || Pole [x + 1][y - 1] != 1 ||
+				Pole [x - 1][y] != 1 || Pole [x - 1][y + 1] != 1 || Pole [x - 1][y - 1] != 1)
+			{
+				Pole[x][y] = 2;
+				cout << "Убил!" << endl;
+			}
+		}
+		else if (Pole[x][y] == 0)
+		{
+			if (Pole[x][y] != 0)
+			{
+				cout << "Сюда уже был произведен выстрел!" << endl;
+				continue;
+			}
+			Pole[x][y] = 3;
+			cout << "Промах!" << endl;
+			break;
+		}
+	} while (Pole[x][y] != 1);
+	return Pole[x][y];
+}
 /*int proverkapobedi()
 {
-//просто проверяем сколько клеток со значением ранил и у какого игрока быстрее наберётся 20,тот и победил
+
 }*/
 
 int autorasstanovka(int Pole_Comp[10][10], int Pole_Mask[10][10], int x, int y, int size_ship, int num_ship)
@@ -535,8 +577,6 @@ int main()
 	int Pole_Comp[10][10] = { 0 };
 	int Pole_Mask[10][10] = { 0 };
 	int x = 0, y = 0;//x-столбик y-строчка
-	//int *pointer_x = &x;
-	//int *pointer_y = &y;
 	int tip = 0;
 	int l;
 	setlocale(LC_CTYPE, "rus");
@@ -576,8 +616,11 @@ int main()
 	polekompa(Pole_Comp, Pole_Mask, x, y);
 	while (true)
 	{
-		moihod(Pole, Pole_Comp, Pole_Mask, x, y);
+		/*moihod(Pole, Pole_Comp, Pole_Mask, x, y);
 		cout << "Pole kompa: \n";
-		polekompa(Pole_Comp, Pole_Mask, x, y);
+		polekompa(Pole_Comp, Pole_Mask, x, y);*/
+		hodkomp(Pole, x, y);
+		cout << "Pole igroka: \n";
+		poleigroka(Pole, x, y); 
 	}
 }
